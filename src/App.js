@@ -1,15 +1,18 @@
 import React from "react";
+import { ToastContainer } from "react-toastify";
 
 import { ThemeProvider } from "styled-components";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import Routes from "./routes";
+import history from "./services/history";
 
 import GlobalStyles from "./styles/global";
 import theme from "./styles/theme";
 
 import Header from "./components/Header";
+import ScrollToChangePage from "./components/ScrollToChangePage";
 
 import store from "./store";
 
@@ -20,10 +23,13 @@ export default function App() {
         <>
           <GlobalStyles />
 
-          <BrowserRouter>
+          <Router history={history}>
             <Header />
             <Routes />
-          </BrowserRouter>
+
+            <ScrollToChangePage />
+          </Router>
+          <ToastContainer draggablePercent={60} autoClose={1000} />
         </>
       </ThemeProvider>
     </Provider>

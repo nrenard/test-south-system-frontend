@@ -11,6 +11,12 @@ const Routes = () => (
   <Switch>
     <Suspense fallback={<Loader />}>
       <PrivateRoute exact path="/" component={lazyDefault("Home")} />
+      <PrivateRoute
+        exact
+        path="/dragon/:id"
+        component={lazyDefault("Dragon")}
+      />
+      <PrivateRoute exact path="/new" component={lazyDefault("Dragon")} />
       <Route exact path="/login" component={lazyDefault("Login")} />
     </Suspense>
   </Switch>

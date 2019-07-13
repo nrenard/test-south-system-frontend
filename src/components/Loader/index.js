@@ -1,9 +1,11 @@
 import React from "react";
 
-import { Container, Loader } from "./styles";
+import { Container, LoaderStyles } from "./styles";
 
-export default () => (
+const Loader = () => (
   <Container>
-    <Loader />
+    <LoaderStyles />
   </Container>
 );
+
+export default Loader;

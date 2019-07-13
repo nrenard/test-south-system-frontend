@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
+
+import withUser from "../../containers/user";
 
 import {
   HeaderStyles,
@@ -12,28 +14,30 @@ import {
 } from "./styles";
 
 import logo from "../../images/logo.svg";
-import user from "../../images/user.svg";
+import userImage from "../../images/user.svg";
 
-const Header = () => {
-  const user = false;
+const Header = ({ user: { detail }, logoutRequest }) => {
+  const handleLogout = useCallback(() => {
+    logoutRequest();
+  }, [logoutRequest]);
 
   return (
     <HeaderStyles>
-      <Container hasUser={user}>
+      <Container hasUser={detail}>
         <Link to="/">
           <Logo src={logo} alt="Dragons" />
         </Link>
 
-        {user && (
+        {detail && (
           <UserWrapper>
             <UserImage>
-              <Logout>sair</Logout>
-              <img src={user} alt="Usuário" />
+              <Logout onClick={handleLogout}>sair</Logout>
+
+              <img src={userImage} alt="Usuário" />
             </UserImage>
 
             <UserInfo>
-              <strong>nicolasrenard1999@gmail.com</strong>
-              <strong>Nicolas Renard</strong>
+              <strong>{detail.nickname}</strong>
             </UserInfo>
           </UserWrapper>
         )}
@@ -42,4 +46,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default withUser(Header);

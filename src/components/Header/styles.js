@@ -5,7 +5,7 @@ import { container, simpleFlex } from "../../styles/mixins";
 export const HeaderStyles = styled.header`
   padding: ${({ theme }) => `${theme.basePadding * 2}px 0`};
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: ${({ theme }) => `${theme.baseMargin * 2}px`};
+  margin-bottom: ${({ theme }) => `${theme.baseMargin * 5}px`};
 `;
 
 export const Container = styled.div`
@@ -25,7 +25,7 @@ export const Logo = styled.img`
 
 export const UserWrapper = styled.div`
   ${simpleFlex};
-  margin-top: ${({ theme }) => `${theme.baseMargin}px`};
+  margin-top: ${({ theme }) => `${theme.baseMargin * 3}px`};
 
   @media (min-width: 768px) {
     margin-top: 0;
@@ -36,27 +36,16 @@ export const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: ${({ theme }) => `${theme.baseMargin * 2}px`};
-  font-size: 12px;
-
-  strong {
-    display: block;
-
-    &:last-child {
-      margin-top: ${({ theme }) => `${theme.baseMargin}px`};
-    }
-  }
-
-  @media (min-width: 768px) {
-    font-size: 16px;
-  }
+  font-size: 16px;
+  color: ${({ theme }) => theme.secondaryColor};
 `;
 
 export const UserImage = styled.div`
   ${simpleFlex};
   justify-content: center;
   position: relative;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: ${({ theme }) => `${theme.baseRadius * 2}px`};
+  background-color: ${({ theme }) => theme.lightGray};
   width: 80px;
   height: 80px;
   margin-left: 0;

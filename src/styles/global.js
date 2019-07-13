@@ -1,7 +1,8 @@
+import styled, { createGlobalStyle } from "styled-components";
 
-import styled, { createGlobalStyle } from 'styled-components';
+import { container } from "./mixins";
 
-import { container } from './mixins';
+import "react-toastify/dist/ReactToastify.css";
 
 export const Container = styled.div`
   ${container};
@@ -14,6 +15,7 @@ export default createGlobalStyle`
     padding: 0;
     margin: 0;
     text-decoration: none;
+    outline-color:  ${({ theme }) => theme.secondaryColor};
   }
   
   html, body, #root {
