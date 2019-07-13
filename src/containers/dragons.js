@@ -14,7 +14,7 @@ let isNew = true;
 export default function withDragons(WrappedComponent) {
   const WithDragonsComponent = props => {
     useEffect(() => {
-      if (isNew && !props.dragons.list) {
+      if (isNew) {
         props.getDragons();
       }
 

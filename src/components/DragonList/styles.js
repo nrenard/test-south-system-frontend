@@ -13,10 +13,23 @@ export const List = styled.ul`
 export const Dragon = styled.li`
   ${simpleFlex};
   width: 100%;
-  padding: 0 20px;
   justify-content: center;
   flex-direction: column;
   margin-bottom: 40px;
+  text-align: center;
+  padding: ${({ theme }) => `0 ${theme.basePadding}px`};
+
+  a {
+    width: 100%;
+    background-color: ${({ theme }) => theme.secondaryColor};
+    border-radius: ${({ theme }) => `${theme.baseRadius * 2}px`};
+    padding: ${({ theme }) => `${theme.basePadding}px`};
+    transition: 0.2s box-shadow ease;
+
+    &:hover {
+      box-shadow: ${({ theme }) => `${theme.lightGray} 0px 0px 30px`};
+    }
+  }
 
   strong {
     color: ${({ theme }) => theme.lightGray};
@@ -25,8 +38,9 @@ export const Dragon = styled.li`
   }
 
   span {
-    font-size: 12px;
+    font-size: 14px;
     color: #fff;
+    text-transform: uppercase;
   }
 
   @media (min-width: 768px) {
@@ -37,8 +51,8 @@ export const Dragon = styled.li`
 
 export const DragonImgWrapper = styled.div`
   ${simpleFlex};
+  margin: auto;
   justify-content: center;
-  background-color: ${({ theme }) => theme.lightGray};
   width: 110px;
   height: 100px;
   border-radius: ${({ theme }) => `${theme.baseRadius}px`};

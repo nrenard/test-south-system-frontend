@@ -1,4 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { Creators as DragonsActions } from "../../store/ducks/dragons";
 
 import Loader from "../../components/Loader";
 import TitlePages from "../../components/TitlePages";
@@ -8,20 +12,22 @@ import Button from "../../components/Button";
 
 import api from "../../services/api";
 import * as notifier from "../../helpers/notifier";
+import { toLocaleString } from "../../helpers/date";
 
 import { Container, WrapperButtons } from "./styles";
+import theme from "../../styles/theme";
 
 let redirectTimeout = null;
-
-const updateDragon = async ({ id, ...data }) => api.put(`/${id}`, data);
 
 export default function Dragon({ history, match }) {
   const dragonId = match.params.id;
 
   const [name, setName] = useState("");
   const [type, setType] = useState("");
-  const [created, setCrated] = useState("");
+  const [date, setDate] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
 
   const getDragon = useCallback(async () => {
     if (dragonId) {
@@ -33,11 +39,10 @@ export default function Dragon({ history, match }) {
         if (dragon) {
           setName(dragon.name);
           setType(dragon.type);
-          setCrated(dragon.createdAt);
+          setDate(toLocaleString(dragon.createdAt));
         }
       } catch (err) {
         notifier.error();
-
         redirectTimeout = setTimeout(() => history.push("/"), 2000);
       } finally {
         setLoading(false);
@@ -56,16 +61,18 @@ export default function Dragon({ history, match }) {
     []
   );
 
-  const submitDragon = async event => {
+  const submitDragon = event => {
     if (event) event.preventDefault();
 
-    try {
-      await updateDragon({ id: dragonId, name, type });
-      notifier.success(`O dragão ${name} foi atualizado.`);
-    } catch (err) {
-      console.log("err: ", err);
-      notifier.error();
+    if (dragonId) {
+      dispatch(DragonsActions.updateDragon({ id: dragonId, name, type }));
+    } else {
+      dispatch(DragonsActions.addDragon({ name, type }));
     }
+  };
+
+  const deleteDragon = () => {
+    dispatch(DragonsActions.deleteDragon({ id: dragonId, name }));
   };
 
   const title = dragonId
@@ -78,7 +85,13 @@ export default function Dragon({ history, match }) {
         <Loader />
       ) : (
         <>
-          <TitlePages title={title} />
+          <TitlePages title={title}>
+            {dragonId && (
+              <Button color={theme.errorColor} onClick={deleteDragon}>
+                Excluir
+              </Button>
+            )}
+          </TitlePages>
 
           <Form onSubmit={submitDragon}>
             <Input
@@ -87,6 +100,7 @@ export default function Dragon({ history, match }) {
               required={true}
               placeholder="Nome do dragão"
               name="name"
+              autoFocus
             />
             <Input
               value={type}
@@ -95,10 +109,16 @@ export default function Dragon({ history, match }) {
               placeholder="Tipo do dragão"
               name="type"
             />
-            {dragonId && <Input value={created} readOnly name="createdAt" />}
+
+            {dragonId && <Input value={date} readOnly name="createdAt" />}
 
             <WrapperButtons>
-              <Button type="submit">salvar</Button>
+              <Link to="/">
+                <Button type="button" color={theme.lightGray}>
+                  Voltar
+                </Button>
+              </Link>
+
               <Button type="submit">salvar</Button>
             </WrapperButtons>
           </Form>

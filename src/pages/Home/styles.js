@@ -4,4 +4,5 @@ import { container } from "../../styles/mixins";
 
 export const Container = styled.main`
   ${container};
+  padding-bottom: ${({ theme }) => `${theme.basePadding * 2}px`};
 `;

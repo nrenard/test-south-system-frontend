@@ -9,7 +9,7 @@ import defaultDragon from "../../images/defaultDragon.svg";
 
 import { Container, List, Dragon, DragonImgWrapper, DragonImg } from "./styles";
 
-function DragonList ({ dragons: { list, loading } }) {
+function DragonList({ dragons: { list, loading } }) {
   return (
     <Container>
       {loading || !list ? (
@@ -22,16 +22,22 @@ function DragonList ({ dragons: { list, loading } }) {
                 <DragonImgWrapper>
                   <DragonImg src={defaultDragon} alt={dragon.name} />
                 </DragonImgWrapper>
+
                 <strong>{dragon.name}</strong>
-                <span>{dragon.type}</span>
+
+                <span>
+                  <small>tipo: </small>
+                  {dragon.type}
+                </span>
               </Link>
             </Dragon>
           ))}
         </List>
       )}
-      {list && !list.length && <p>Nenhum dragão encontrado :'(</p>}
+
+      {!loading && list && !list.length && <p>Nenhum dragão encontrado :'(</p>}
     </Container>
   );
-};
+}
 
 export default withDragons(DragonList);

@@ -3,11 +3,9 @@ import PropTypes from "prop-types";
 
 import { Container, ButtonStyles } from "./styles";
 
-const Button = ({ type, children, width }) => (
+const Button = ({ children, ...props }) => (
   <Container>
-    <ButtonStyles type={type} width={width}>
-      {children}
-    </ButtonStyles>
+    <ButtonStyles {...props}>{children}</ButtonStyles>
   </Container>
 );
 

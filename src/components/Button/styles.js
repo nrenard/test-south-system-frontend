@@ -11,7 +11,7 @@ export const ButtonStyles = styled.button`
   width: ${({ width }) => width};
   text-transform: uppercase;
   color: #fff;
-  background-color: ${({ theme }) => theme.secondaryColor};
+  background-color: ${({ theme, color }) => color || theme.secondaryColor};
   border-radius: 4px;
   padding: ${({ theme }) => `${theme.basePadding}px`};
   border: 0;
