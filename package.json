@@ -21,8 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll --verbose",
     "coverage": "react-scripts test --watchAll --coverage",
-    "eject": "react-scripts eject",
-    "run-tests-to-push": "react-scripts test --verbose"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -58,7 +57,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run run-tests-to-push"
+      "pre-push": "npm run test"
     }
   }
 }
