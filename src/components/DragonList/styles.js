@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { simpleFlex } from "../../styles/mixins";
+import { simpleFlex } from '../../styles/mixins';
 
 export const Container = styled.div``;
 

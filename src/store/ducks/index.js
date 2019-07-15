@@ -1,6 +1,6 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
-import dragons from "./dragons";
-import user from "./user";
+import dragons from './dragons';
+import user from './user';
 
 export default combineReducers({ user, dragons });

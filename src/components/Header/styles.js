@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { container, simpleFlex } from "../../styles/mixins";
+import { container, simpleFlex } from '../../styles/mixins';
 
 export const HeaderStyles = styled.header`
   padding: ${({ theme }) => `${theme.basePadding * 2}px 0`};
@@ -11,7 +11,7 @@ export const HeaderStyles = styled.header`
 export const Container = styled.div`
   ${container};
   ${simpleFlex};
-  justify-content: ${({ hasUser }) => (hasUser ? "space-between" : "center")};
+  justify-content: ${({ hasUser }) => (hasUser ? 'space-between' : 'center')};
   flex-direction: column;
 
   @media (min-width: 768px) {

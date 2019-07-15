@@ -1,38 +1,38 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect, useCallback } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import { Creators as DragonsActions } from "../../store/ducks/dragons";
+import { Creators as DragonsActions } from '../../store/ducks/dragons';
 
-import Loader from "../../components/Loader";
-import TitlePages from "../../components/TitlePages";
-import Form from "../../components/Form";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
+import Loader from '../../components/Loader';
+import TitlePages from '../../components/TitlePages';
+import Form from '../../components/Form';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
-import api from "../../services/api";
-import * as notifier from "../../helpers/notifier";
-import { toLocaleString } from "../../helpers/date";
+import api from '../../services/api';
+import * as notifier from '../../services/notifier';
 
-import { Container, WrapperButtons } from "./styles";
-import theme from "../../styles/theme";
+import { toLocaleString } from '../../helpers/date';
+
+import { Container, WrapperButtons } from './styles';
+import theme from '../../styles/theme';
 
 let redirectTimeout = null;
 
-export default function Dragon({ history, match }) {
+function Dragon({ history, match }) {
   const dragonId = match.params.id;
 
-  const [name, setName] = useState("");
-  const [type, setType] = useState("");
-  const [date, setDate] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState('');
+  const [type, setType] = useState('');
+  const [date, setDate] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
 
   const getDragon = useCallback(async () => {
     if (dragonId) {
-      setLoading(true);
-
       try {
         const dragon = await api.get(`/${dragonId}`);
 
@@ -43,10 +43,12 @@ export default function Dragon({ history, match }) {
         }
       } catch (err) {
         notifier.error();
-        redirectTimeout = setTimeout(() => history.push("/"), 2000);
+        redirectTimeout = setTimeout(() => history.push('/'), 2000);
       } finally {
         setLoading(false);
       }
+    } else {
+      setLoading(false);
     }
   }, [dragonId, history]);
 
@@ -58,10 +60,10 @@ export default function Dragon({ history, match }) {
     () => () => {
       clearTimeout(redirectTimeout);
     },
-    []
+    [],
   );
 
-  const submitDragon = event => {
+  const submitDragon = (event) => {
     if (event) event.preventDefault();
 
     if (dragonId) {
@@ -77,7 +79,7 @@ export default function Dragon({ history, match }) {
 
   const title = dragonId
     ? `Está editando o ${name}.`
-    : `Está criando ${!!name ? `o ${name}` : "um dragão"}`;
+    : `Está criando ${name ? `o ${name}` : 'um dragão'}`;
 
   return (
     <Container>
@@ -97,7 +99,7 @@ export default function Dragon({ history, match }) {
             <Input
               value={name}
               onChange={event => setName(event.target.value)}
-              required={true}
+              required
               placeholder="Nome do dragão"
               name="name"
               autoFocus
@@ -105,12 +107,20 @@ export default function Dragon({ history, match }) {
             <Input
               value={type}
               onChange={event => setType(event.target.value)}
-              required={true}
+              required
               placeholder="Tipo do dragão"
               name="type"
             />
 
-            {dragonId && <Input value={date} readOnly name="createdAt" />}
+            {dragonId && (
+              <Input
+                value={date}
+                readOnly
+                name="createdAt"
+                placeholder="Data de criação"
+                onChange={() => {}}
+              />
+            )}
 
             <WrapperButtons>
               <Link to="/">
@@ -127,3 +137,16 @@ export default function Dragon({ history, match }) {
     </Container>
   );
 }
+
+Dragon.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
+};
+
+export default Dragon;

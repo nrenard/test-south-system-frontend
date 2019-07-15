@@ -1,8 +1,8 @@
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from 'styled-components';
 
-import { container } from "./mixins";
+import { container } from './mixins';
 
-import "react-toastify/dist/ReactToastify.css";
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Container = styled.div`
   ${container};
@@ -22,9 +22,9 @@ export default createGlobalStyle`
     height: 100%;
   }
 
-	button {
-		cursor: pointer;
-	}
+  button {
+    cursor: pointer;
+  }
 
   body {
     -webkit-font-smoothing: antialiased !important;

@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-
-import { withRouter } from "react-router-dom";
+import { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 function ScrollToChangePage({ location }) {
   useEffect(() => {
@@ -9,5 +9,12 @@ function ScrollToChangePage({ location }) {
 
   return null;
 }
+
+ScrollToChangePage.propTypes = {
+  location: PropTypes.shape({
+    path: PropTypes.string,
+    search: PropTypes.string,
+  }).isRequired,
+};
 
 export default withRouter(ScrollToChangePage);

@@ -1,24 +1,24 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Creators as UserActions } from "../../store/ducks/user";
+import { Creators as UserActions } from '../../store/ducks/user';
 
-import TitlePages from "../../components/TitlePages";
-import Form from "../../components/Form";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
-import Loader from "../../components/Loader";
+import TitlePages from '../../components/TitlePages';
+import Form from '../../components/Form';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import Loader from '../../components/Loader';
 
-import { Container } from "./styles";
+import { Container } from './styles';
 
 function Login() {
-  const [nickname, setNickName] = useState("");
-  const [password, setPassword] = useState("");
+  const [nickname, setNickName] = useState('');
+  const [password, setPassword] = useState('');
 
   const loading = useSelector(state => state.user.loading);
   const dispatch = useDispatch();
 
-  const sendForm = event => {
+  const sendForm = (event) => {
     if (event) event.preventDefault();
     if (loading) return;
 
@@ -35,7 +35,7 @@ function Login() {
           name="nickname"
           onChange={event => setNickName(event.target.value)}
           value={nickname}
-          required={true}
+          required
           autoFocus
         />
 
@@ -45,10 +45,10 @@ function Login() {
           type="password"
           onChange={event => setPassword(event.target.value)}
           value={password}
-          required={true}
+          required
         />
 
-        <Button width="80px">{!loading ? "Entrar" : <Loader />}</Button>
+        <Button width="80px">{!loading ? 'Entrar' : <Loader />}</Button>
       </Form>
     </Container>
   );

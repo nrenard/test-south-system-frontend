@@ -1,22 +1,17 @@
-import React, { useCallback } from "react";
-import { Link } from "react-router-dom";
+import React, { useCallback } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-import withUser from "../../containers/user";
+import withUser from '../../containers/user';
 
 import {
-  HeaderStyles,
-  Container,
-  Logo,
-  UserWrapper,
-  UserImage,
-  UserInfo,
-  Logout
-} from "./styles";
+  HeaderStyles, Container, Logo, UserWrapper, UserImage, UserInfo, Logout,
+} from './styles';
 
-import logo from "../../images/logo.svg";
-import userImage from "../../images/user.svg";
+import logo from '../../images/logo.svg';
+import userImage from '../../images/user.svg';
 
-const Header = ({ user: { detail }, logoutRequest }) => {
+function Header({ user: { detail }, logoutRequest }) {
   const handleLogout = useCallback(() => {
     logoutRequest();
   }, [logoutRequest]);
@@ -44,6 +39,13 @@ const Header = ({ user: { detail }, logoutRequest }) => {
       </Container>
     </HeaderStyles>
   );
+}
+
+Header.propTypes = {
+  logoutRequest: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    detail: PropTypes.shape({ nickname: PropTypes.string }),
+  }).isRequired,
 };
 
 export default withUser(Header);

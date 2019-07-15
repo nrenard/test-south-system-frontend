@@ -1,14 +1,17 @@
-import { all, takeLatest, call, put, select } from "redux-saga/effects";
-import * as notifier from "../../../helpers/notifier";
+import {
+  all, takeLatest, call, put, select,
+} from 'redux-saga/effects';
 
-import history from "../../../services/history";
-import { dragonsParser } from "../../../helpers/parsers";
+import history from '../../services/history';
+import { dragonsParser } from '../../helpers/parsers';
 
-import { Types, Creators as DragonsActions } from "../../ducks/dragons";
+import * as notifier from '../../services/notifier';
 
-import api from "../../../services/api";
+import { Types, Creators as DragonsActions } from '../ducks/dragons.js';
 
-function* getDragons() {
+import api from '../../services/api';
+
+export function* getDragons() {
   try {
     const dragons = yield call(api.get);
     yield put(DragonsActions.setDragonsSuccess(dragonsParser(dragons)));
@@ -18,16 +21,15 @@ function* getDragons() {
   }
 }
 
-function* addDragon({ payload }) {
+export function* addDragon({ payload }) {
   try {
     const dragons = yield select(state => state.dragons.list);
 
-    history.push("/");
+    history.push('/');
 
-    const dragon = yield call(api.post, "/", payload);
-    yield put(
-      DragonsActions.setDragonsSuccess(dragonsParser([...dragons, dragon]))
-    );
+    const dragon = yield call(api.post, '/', payload);
+
+    yield put(DragonsActions.setDragonsSuccess(dragonsParser([...dragons, dragon])));
 
     notifier.success(`O dragão ${payload.name} foi adicionado.`, 2000);
   } catch (err) {
@@ -36,9 +38,9 @@ function* addDragon({ payload }) {
   }
 }
 
-function* deleteDragon({ payload }) {
+export function* deleteDragon({ payload }) {
   try {
-    history.push("/");
+    history.push('/');
 
     yield call(api.delete, `/${payload.id}`);
     yield put(DragonsActions.deleteDragonSuccess(payload));
@@ -50,9 +52,9 @@ function* deleteDragon({ payload }) {
   }
 }
 
-function* updateDragon({ payload }) {
+export function* updateDragon({ payload }) {
   try {
-    history.push("/");
+    history.push('/');
 
     yield call(api.put, `/${payload.id}`, payload);
     yield put(DragonsActions.updateDragonSuccess(payload));
@@ -64,7 +66,7 @@ function* updateDragon({ payload }) {
   }
 }
 
-function* sortDragons() {
+export function* sortDragons() {
   try {
     const dragons = yield select(state => state.dragons.list);
     yield put(DragonsActions.setDragonsSuccess(dragonsParser(dragons)));
@@ -80,6 +82,6 @@ export default function* dragonsSaga() {
     takeLatest(Types.ADD_DRAGON, addDragon),
     takeLatest(Types.DELETE_DRAGON, deleteDragon),
     takeLatest(Types.UPDATE_DRAGON, updateDragon),
-    takeLatest(Types.UPDATE_DRAGON_SUCCESS, sortDragons)
+    takeLatest(Types.UPDATE_DRAGON_SUCCESS, sortDragons),
   ]);
 }

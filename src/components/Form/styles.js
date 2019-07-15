@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { Container as ContainerInput } from "../Input/styles";
-import { Container as ContainerButton } from "../Button/styles";
+import { Container as ContainerInput } from '../Input/styles';
+import { Container as ContainerButton } from '../Button/styles';
 
 export const FormStyles = styled.form`
   display: flex;

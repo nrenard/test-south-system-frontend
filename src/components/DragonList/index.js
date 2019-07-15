@@ -1,13 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-import withDragons from "../../containers/dragons";
+import withDragons from '../../containers/dragons';
 
-import Loader from "../Loader";
+import Loader from '../Loader';
 
-import defaultDragon from "../../images/defaultDragon.svg";
+import defaultDragon from '../../images/defaultDragon.svg';
 
-import { Container, List, Dragon, DragonImgWrapper, DragonImg } from "./styles";
+import {
+  Container, List, Dragon, DragonImgWrapper, DragonImg,
+} from './styles';
 
 function DragonList({ dragons: { list, loading } }) {
   return (
@@ -39,5 +42,18 @@ function DragonList({ dragons: { list, loading } }) {
     </Container>
   );
 }
+
+DragonList.propTypes = {
+  dragons: PropTypes.shape({
+    list: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        name: PropTypes.string,
+        type: PropTypes.string,
+      }),
+    ),
+    loading: PropTypes.bool,
+  }).isRequired,
+};
 
 export default withDragons(DragonList);

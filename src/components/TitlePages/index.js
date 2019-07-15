@@ -1,12 +1,20 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { Container, Title } from "./styles";
+import { Container, Title } from './styles';
 
-const TitlePages = ({ title, children }) => (
-  <Container>
-    <Title>{title}</Title>
-    {children}
-  </Container>
-);
+function TitlePages({ title, children }) {
+  return (
+    <Container>
+      <Title>{title}</Title>
+      {children}
+    </Container>
+  );
+}
+
+TitlePages.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.element,
+};
 
 export default TitlePages;

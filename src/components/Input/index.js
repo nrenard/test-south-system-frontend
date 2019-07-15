@@ -1,23 +1,25 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { Container, InputStyle } from "./styles";
+import { Container, InputStyle } from './styles';
 
-const Input = props => (
-  <Container>
-    <InputStyle {...props} />
-  </Container>
-);
+function Input(props) {
+  return (
+    <Container>
+      <InputStyle {...props} />
+    </Container>
+  );
+}
 
 Input.propTypes = {
   name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  type: PropTypes.string
+  placeholder: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  type: PropTypes.string,
 };
 
 Input.defaultProps = {
-  type: "text",
-  placeholder: ""
+  type: 'text',
 };
 
 export default Input;

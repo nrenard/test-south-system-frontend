@@ -1,18 +1,19 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import { Creators as DragonsActions } from "../store/ducks/dragons";
+import { Creators as DragonsActions } from '../store/ducks/dragons';
 
 const mapStateToProps = ({ dragons }) => ({ dragons });
 
 const mapDispatchToProps = dispatch => ({
-  getDragons: () => dispatch(DragonsActions.getDragons())
+  getDragons: () => dispatch(DragonsActions.getDragons()),
 });
 
 let isNew = true;
 
 export default function withDragons(WrappedComponent) {
-  const WithDragonsComponent = props => {
+  const WithDragonsComponent = (props) => {
     useEffect(() => {
       if (isNew) {
         props.getDragons();
@@ -24,8 +25,12 @@ export default function withDragons(WrappedComponent) {
     return <WrappedComponent {...props} />;
   };
 
+  WithDragonsComponent.propTypes = {
+    getDragons: PropTypes.func.isRequired,
+  };
+
   return connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
   )(WithDragonsComponent);
 }

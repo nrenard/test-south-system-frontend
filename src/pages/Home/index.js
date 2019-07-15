@@ -1,11 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import TitlePages from "../../components/TitlePages";
-import DragonList from "../../components/DragonList";
-import Button from "../../components/Button";
+import TitlePages from '../../components/TitlePages';
+import DragonList from '../../components/DragonList';
+import Button from '../../components/Button';
 
-import { Container } from "./styles";
+import { Container } from './styles';
 
 function Home() {
   return (

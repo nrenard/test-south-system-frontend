@@ -1,63 +1,63 @@
 export const Types = {
-  GET_DRAGONS: "@dragons/GET_DRAGONS",
-  SET_DRAGONS_SUCCESS: "@dragons/SET_DRAGONS_SUCCESS",
+  GET_DRAGONS: '@dragons/GET_DRAGONS',
+  SET_DRAGONS_SUCCESS: '@dragons/SET_DRAGONS_SUCCESS',
 
-  ADD_DRAGON: "@dragons/ADD_DRAGON",
-  ADD_DRAGON_SUCCESS: "@dragons/ADD_DRAGON_SUCCESS",
+  ADD_DRAGON: '@dragons/ADD_DRAGON',
+  ADD_DRAGON_SUCCESS: '@dragons/ADD_DRAGON_SUCCESS',
 
-  DELETE_DRAGON: "@dragons/DELETE_DRAGON",
-  DELETE_DRAGON_SUCCESS: "@dragons/DELETE_DRAGON_SUCCESS",
+  DELETE_DRAGON: '@dragons/DELETE_DRAGON',
+  DELETE_DRAGON_SUCCESS: '@dragons/DELETE_DRAGON_SUCCESS',
 
-  UPDATE_DRAGON: "@dragons/UPDATE_DRAGON",
-  UPDATE_DRAGON_SUCCESS: "@dragons/UPDATE_DRAGON_SUCCESS",
+  UPDATE_DRAGON: '@dragons/UPDATE_DRAGON',
+  UPDATE_DRAGON_SUCCESS: '@dragons/UPDATE_DRAGON_SUCCESS',
 
-  DRAGONS_ERROR: "@dragons/DRAGONS_ERROR"
+  DRAGONS_ERROR: '@dragons/DRAGONS_ERROR',
 };
 
 export const INITIAL_STATE = {
   list: [],
-  loading: false
+  loading: false,
 };
 
 export const Creators = {
   getDragons: () => ({
-    type: Types.GET_DRAGONS
+    type: Types.GET_DRAGONS,
   }),
   setDragonsSuccess: payload => ({
     type: Types.SET_DRAGONS_SUCCESS,
-    payload
+    payload,
   }),
 
   addDragon: payload => ({
     type: Types.ADD_DRAGON,
-    payload
+    payload,
   }),
   addDragonSuccess: payload => ({
     type: Types.ADD_DRAGON_SUCCESS,
-    payload
+    payload,
   }),
 
   deleteDragon: payload => ({
     type: Types.DELETE_DRAGON,
-    payload
+    payload,
   }),
   deleteDragonSuccess: payload => ({
     type: Types.DELETE_DRAGON_SUCCESS,
-    payload
+    payload,
   }),
 
   updateDragon: payload => ({
     type: Types.UPDATE_DRAGON,
-    payload
+    payload,
   }),
   updateDragonSuccess: payload => ({
     type: Types.UPDATE_DRAGON_SUCCESS,
-    payload
+    payload,
   }),
 
   dragonsError: () => ({
-    type: Types.DRAGONS_ERROR
-  })
+    type: Types.DRAGONS_ERROR,
+  }),
 };
 
 export default function dragons(state = INITIAL_STATE, { type, payload }) {
@@ -69,20 +69,20 @@ export default function dragons(state = INITIAL_STATE, { type, payload }) {
       return {
         ...state,
         loading: false,
-        list: payload
+        list: payload,
       };
 
     case Types.ADD_DRAGON:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
 
     case Types.ADD_DRAGON_SUCCESS:
       return {
         ...state,
         loading: false,
-        list: [...state.list, payload]
+        list: [...state.list, payload],
       };
 
     case Types.DELETE_DRAGON:
@@ -92,7 +92,7 @@ export default function dragons(state = INITIAL_STATE, { type, payload }) {
       return {
         ...state,
         loading: false,
-        list: state.list.filter(dragon => dragon.id !== payload.id)
+        list: state.list.filter(dragon => dragon.id !== payload.id),
       };
 
     case Types.UPDATE_DRAGON:
@@ -102,22 +102,22 @@ export default function dragons(state = INITIAL_STATE, { type, payload }) {
       return {
         ...state,
         loading: false,
-        list: state.list.map(dragon => {
+        list: state.list.map((dragon) => {
           if (dragon.id === payload.id) {
             return {
               ...dragon,
-              ...payload
+              ...payload,
             };
           }
 
           return dragon;
-        })
+        }),
       };
 
     case Types.DRAGONS_ERROR:
       return {
         ...state,
-        loading: false
+        loading: false,
       };
 
     default:
