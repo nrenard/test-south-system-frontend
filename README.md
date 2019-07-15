@@ -2,6 +2,10 @@
 
 Requisitos para rodar o projeto nodeJS >= 8. Clonar repositório, entrar na pasta e instalar suas dependências com o comando `yarn` ou `npm install`.
 
+## Preview
+
+[Documentação do exercício](http://nrenard-test-south-system-frontend.surge.sh/).
+
 ## Para rodar o server
 
 ```
