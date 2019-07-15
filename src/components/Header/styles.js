@@ -23,9 +23,33 @@ export const Logo = styled.img`
   width: 100px;
 `;
 
+export const Logout = styled.div`
+  ${simpleFlex};
+  cursor: pointer;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+`;
+
 export const UserWrapper = styled.div`
   ${simpleFlex};
   margin-top: ${({ theme }) => `${theme.baseMargin * 3}px`};
+  padding: ${({ theme }) => `${theme.basePadding - 5}px`};
+  border-radius: ${({ theme }) => `${theme.baseRadius * 2}px`};
+  background-color: ${({ theme }) => theme.lightGray};
+
+  &:hover {
+    ${Logout} {
+      opacity: 1;
+    }
+  }
 
   @media (min-width: 768px) {
     margin-top: 0;
@@ -35,9 +59,9 @@ export const UserWrapper = styled.div`
 export const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: ${({ theme }) => `${theme.baseMargin * 2}px`};
+  margin-left: ${({ theme }) => `${theme.baseMargin}px`};
   font-size: 16px;
-  color: ${({ theme }) => theme.secondaryColor};
+  color: #fff;
 `;
 
 export const UserImage = styled.div`
@@ -53,24 +77,5 @@ export const UserImage = styled.div`
 
   img {
     width: 60%;
-  }
-`;
-
-export const Logout = styled.div`
-  ${simpleFlex};
-  cursor: pointer;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  text-transform: uppercase;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-
-  &:hover {
-    opacity: 1;
   }
 `;
