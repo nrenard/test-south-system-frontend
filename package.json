@@ -21,7 +21,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll --verbose",
     "coverage": "react-scripts test --watchAll --coverage",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy:build": "react-scripts build",
+    "deploy:surge": "npx s --project ./build --domain nrenard-test-south-system-frontend.surge.sh",
+    "deploy:clear": "npx cross-env rm -rf /.build",
+    "deploy": "npx cross-env run-s deploy:clear deploy:build deploy:surge"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -47,11 +51,19 @@
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.17.0",
+    "cross-env": "^5.2.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.2",
-    "redux-mock-store": "^1.5.3"
+    "husky": "^3.0.0",
+    "redux-mock-store": "^1.5.3",
+    "surge": "^0.21.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "CI=true npx react-scripts test --verbose && npm run deploy"
+    }
   }
 }
