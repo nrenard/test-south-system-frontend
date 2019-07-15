@@ -19,9 +19,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --verbose",
-    "coverage": "react-scripts test --coverage",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --watchAll --verbose",
+    "coverage": "react-scripts test --watchAll --coverage",
+    "eject": "react-scripts eject",
+    "run-tests-to-push": "react-scripts test --verbose"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -54,5 +55,10 @@
     "eslint-plugin-react": "^7.14.2",
     "husky": "^3.0.0",
     "redux-mock-store": "^1.5.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run run-tests-to-push"
+    }
   }
 }
