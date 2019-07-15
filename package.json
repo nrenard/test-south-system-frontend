@@ -22,9 +22,9 @@
     "test": "react-scripts test --watchAll --verbose",
     "coverage": "react-scripts test --watchAll --coverage",
     "eject": "react-scripts eject",
-    "deploy:build": "react-scripts build",
-    "deploy:surge": "npx s --project ./build --domain nrenard-test-south-system-frontend.surge.sh",
     "deploy:clear": "npx cross-env rm -rf /.build",
+    "deploy:build": "react-scripts build",
+    "deploy:surge": "npx surge --project ./build --domain nrenard-test-south-system-frontend.surge.sh",
     "deploy": "npx cross-env run-s deploy:clear deploy:build deploy:surge"
   },
   "eslintConfig": {
